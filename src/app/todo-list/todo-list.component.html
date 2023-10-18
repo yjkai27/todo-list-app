@@ -1,0 +1,26 @@
+<div class="dashboard-container">
+    <div class="content">
+      <h2>Tasks</h2>
+      <div class="task-list">
+        <div class="section" cdkDropList (cdkDropListDropped)="dropTask($event)">
+          <div class="task-bar" *ngFor="let task of tasks" [class.completed]="task.completed" [class.important]="task.important" cdkDrag cdkDragLockAxis="y">
+            <div class="task-item">
+              <span class="importance" [class.important]="task.important" (click)="toggleImportance(task)">
+                <i class="fas fa-star" [class.yellow-star]="task.important"></i>
+              </span>
+              <span class="task-title" [class.completed]="task.completed" (dblclick)="editTask(task)" *ngIf="selectedTask !== task">{{ task.title }}</span>
+              <input [(ngModel)]="task.title" [class.completed]="task.completed" [class.editing]="selectedTask === task" (blur)="selectedTask = null" (keydown.enter)="selectedTask = null; $event.preventDefault()" *ngIf="selectedTask === task">
+            </div>
+            <span class="trash-icon" (click)="deleteTask(task)">
+              <i class="fas fa-trash"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+  
+      <form (ngSubmit)="addTask()">
+        <input type="text" [(ngModel)]="newTaskTitle" name="newTaskTitle" placeholder="New Task">
+        <button type="submit">Add Task</button>
+      </form>
+    </div>
+  </div>

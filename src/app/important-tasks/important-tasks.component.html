@@ -1,0 +1,11 @@
+<h2>Important Tasks</h2>
+<div class="task-list">
+    <div class="task" *ngFor="let task of importantTasks">
+      <div class="task-bar" [class.completed]="task.completed">
+        <div class="task-icon">
+            <i class="fas fa-star yellow-star"></i>
+        </div>
+        <div class="task-title">{{ task.title }}</div>
+      </div>
+    </div>
+</div>
